@@ -1,0 +1,123 @@
+# Example Web Project Template
+# Save this template with: pp create web-project --path ./templates/example.yaml
+
+name: "web-project"
+description: "A simple static web project structure"
+version: "1.0"
+
+# Optional: Variables for templating
+variables:
+  project_name: "My Web Project"
+  author: "Anonymous"
+
+# The folder structure to create
+structure:
+  - name: "src"
+    type: "directory"
+    children:
+      - name: "index.html"
+        type: "file"
+        content: |
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>{{ project_name }}</title>
+              <link rel="stylesheet" href="styles/main.css">
+          </head>
+          <body>
+              <h1>Welcome to {{ project_name }}</h1>
+              <p>Created by {{ author }}</p>
+              <script src="scripts/app.js"></script>
+          </body>
+          </html>
+
+      - name: "styles"
+        type: "directory"
+        children:
+          - name: "main.css"
+            type: "file"
+            content: |
+              /* Main Stylesheet */
+              * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+              }
+
+              body {
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+                  line-height: 1.6;
+                  padding: 2rem;
+                  background-color: #f5f5f5;
+              }
+
+              h1 {
+                  color: #333;
+                  margin-bottom: 1rem;
+              }
+
+      - name: "scripts"
+        type: "directory"
+        children:
+          - name: "app.js"
+            type: "file"
+            content: |
+              // Main Application Script
+              document.addEventListener('DOMContentLoaded', () => {
+                  console.log('App initialized!');
+              });
+
+  - name: "public"
+    type: "directory"
+    children:
+      - name: "images"
+        type: "directory"
+      - name: "fonts"
+        type: "directory"
+
+  - name: "README.md"
+    type: "file"
+    content: |
+      # {{ project_name }}
+
+      Created by {{ author }}
+
+      ## Getting Started
+
+      1. Open `src/index.html` in your browser
+      2. Edit files in `src/` directory
+      3. Add images to `public/images/`
+
+      ## Structure
+
+      ```
+      src/
+        ├── index.html      # Main HTML file
+        ├── styles/         # CSS files
+        └── scripts/        # JavaScript files
+      public/
+        ├── images/         # Image assets
+        └── fonts/          # Custom fonts
+      ```
+
+  - name: ".gitignore"
+    type: "file"
+    content: |
+      # OS files
+      .DS_Store
+      Thumbs.db
+
+      # Editor files
+      .vscode/
+      .idea/
+      *.swp
+      *.swo
+
+      # Dependencies
+      node_modules/
+
+      # Build output
+      dist/
+      build/
