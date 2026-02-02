@@ -3,7 +3,7 @@
 import click
 
 from pypo.core.storage import storage
-from pypo.utils.helpers import print_success, print_error, print_info, confirm_action
+from pypo.utils.helpers import confirm_action, print_error, print_info, print_success
 
 
 @click.command("delete")
@@ -42,7 +42,8 @@ def delete(name: str, force: bool, archived: bool):
     
     # Confirm deletion
     if not force:
-        if not confirm_action(f"Are you sure you want to delete '{name}'? This cannot be undone."):
+        msg = f"Are you sure you want to delete '{name}'? This cannot be undone."
+        if not confirm_action(msg):
             print_info("Deletion cancelled.")
             return
     
@@ -51,7 +52,7 @@ def delete(name: str, force: bool, archived: bool):
         if storage.delete_template(name, archived=archived):
             print_success(f"Template '{name}' deleted successfully.")
         else:
-            print_error(f"Failed to delete template.")
+            print_error("Failed to delete template.")
             raise SystemExit(1)
     except Exception as e:
         print_error(f"Failed to delete template: {e}")

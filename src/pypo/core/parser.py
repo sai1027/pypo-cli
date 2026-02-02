@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
+
 import yaml
 
 
@@ -87,7 +88,8 @@ class TemplateParser:
                 errors.append("'structure' must be a list")
             else:
                 for i, item in enumerate(template["structure"]):
-                    item_errors = TemplateParser._validate_structure_item(item, f"structure[{i}]")
+                    path = f"structure[{i}]"
+                    item_errors = TemplateParser._validate_structure_item(item, path)
                     errors.extend(item_errors)
         
         return errors
@@ -162,6 +164,7 @@ def parse_template(path_or_content: str | Path) -> dict[str, Any]:
     
     errors = TemplateParser.validate(template)
     if errors:
-        raise TemplateError("Template validation failed:\n" + "\n".join(f"  - {e}" for e in errors))
+        error_list = "\n".join(f"  - {e}" for e in errors)
+        raise TemplateError(f"Template validation failed:\n{error_list}")
     
     return template

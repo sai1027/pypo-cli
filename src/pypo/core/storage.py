@@ -1,8 +1,8 @@
 """Storage management for Python Project (pypo) templates."""
 
-from pathlib import Path
 import json
 import shutil
+from pathlib import Path
 from typing import Optional
 
 

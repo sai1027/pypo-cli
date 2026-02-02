@@ -3,7 +3,7 @@
 import click
 
 from pypo.core.storage import storage
-from pypo.utils.helpers import print_success, print_error, print_info
+from pypo.utils.helpers import print_error, print_info, print_success
 
 
 @click.command("archive")
@@ -57,7 +57,9 @@ def archive(name: str, restore: bool):
         # Check if archived template with same name exists
         if storage.template_exists(name, archived=True):
             print_error(f"An archived template named '{name}' already exists.")
-            print_info("Delete the archived version first with: pypo delete {name} --archived")
+            print_info(
+                f"Delete the archived version first with: pypo delete {name} --archived"
+            )
             raise SystemExit(1)
         
         try:

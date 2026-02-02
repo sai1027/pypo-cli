@@ -1,10 +1,11 @@
 """Export command - Export a template to an external file."""
 
-import click
 from pathlib import Path
 
+import click
+
 from pypo.core.storage import storage
-from pypo.utils.helpers import print_success, print_error, print_info
+from pypo.utils.helpers import print_error, print_info, print_success
 
 
 @click.command("export")
@@ -55,7 +56,7 @@ def export(name: str, output: Path, force: bool):
             print_success(f"Template '{name}' exported successfully!")
             print_info(f"Saved to: {output}")
         else:
-            print_error(f"Failed to export template.")
+            print_error("Failed to export template.")
             raise SystemExit(1)
     except Exception as e:
         print_error(f"Failed to export template: {e}")

@@ -3,8 +3,7 @@
 import click
 
 from pypo.core.storage import storage
-from pypo.core.parser import TemplateParser
-from pypo.utils.helpers import print_info, create_template_table, console
+from pypo.utils.helpers import console, create_template_table, print_info
 
 
 @click.command("list")
@@ -48,7 +47,7 @@ def _show_templates(active: bool = True):
     if not templates:
         print_info(f"No {label.lower()} templates found.")
         if active:
-            console.print("[dim]Create one with: pypo create <name> --path <yaml-file>[/dim]")
+            console.print("[dim]Create one: pypo create <name> --path <yaml>[/dim]")
         return
     
     # Load template info for each
@@ -57,8 +56,9 @@ def _show_templates(active: bool = True):
         content = storage.get_template(name, archived=not active)
         if content:
             try:
-                from pypo.core.parser import TemplateParser
                 import yaml
+
+                from pypo.core.parser import TemplateParser
                 data = yaml.safe_load(content)
                 info = TemplateParser.get_template_info(data)
                 template_info.append(info)

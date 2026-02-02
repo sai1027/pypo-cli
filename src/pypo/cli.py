@@ -3,7 +3,17 @@
 import click
 
 from pypo import __version__
-from pypo.commands import archive, create, delete, duplicate, edit, export, init, list_cmd, source
+from pypo.commands import (
+    archive,
+    create,
+    delete,
+    duplicate,
+    edit,
+    export,
+    init,
+    list_cmd,
+    source,
+)
 
 
 @click.group()

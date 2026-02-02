@@ -1,10 +1,9 @@
 """Utility helpers for Python Project (pypo)."""
 
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
 from rich.syntax import Syntax
-
+from rich.table import Table
 
 # Global console instance
 console = Console()

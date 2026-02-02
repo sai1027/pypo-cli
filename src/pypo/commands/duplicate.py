@@ -3,7 +3,7 @@
 import click
 
 from pypo.core.storage import storage
-from pypo.utils.helpers import print_success, print_error, print_info
+from pypo.utils.helpers import print_error, print_info, print_success
 
 
 @click.command("duplicate")
@@ -44,11 +44,11 @@ def duplicate(source_name: str, new_name: str, force: bool):
     # Duplicate the template
     try:
         if storage.duplicate_template(source_name, new_name):
-            print_success(f"Template duplicated successfully!")
+            print_success("Template duplicated successfully!")
             print_info(f"  From: {source_name}")
             print_info(f"  To:   {new_name}")
         else:
-            print_error(f"Failed to duplicate template.")
+            print_error("Failed to duplicate template.")
             raise SystemExit(1)
     except Exception as e:
         print_error(f"Failed to duplicate template: {e}")

@@ -1,12 +1,13 @@
 """Init command - Scaffold a project from a template."""
 
-import click
 from pathlib import Path
 
+import click
+
+from pypo.core.generator import GeneratorError, generate_project
+from pypo.core.parser import TemplateError, parse_template
 from pypo.core.storage import storage
-from pypo.core.parser import parse_template, TemplateError
-from pypo.core.generator import generate_project, GeneratorError
-from pypo.utils.helpers import print_success, print_error, print_info, console
+from pypo.utils.helpers import console, print_error, print_info, print_success
 
 
 @click.command("init")
@@ -60,20 +61,20 @@ def init(name: str, output: Path, force: bool):
         
         files, dirs = generate_project(template, output)
         
-        print_success(f"Project initialized successfully!")
-        console.print(f"\n[bold]Created:[/bold]")
+        print_success("Project initialized successfully!")
+        console.print("\n[bold]Created:[/bold]")
         console.print(f"  📁 {len(dirs)} directories")
         console.print(f"  📄 {len(files)} files")
         console.print(f"\n[bold]Location:[/bold] {output}")
         
         # Show created structure
         if len(files) <= 15:
-            console.print(f"\n[bold]Files created:[/bold]")
+            console.print("\n[bold]Files created:[/bold]")
             for f in files:
                 rel_path = f.relative_to(output)
                 console.print(f"  [dim]└─[/dim] {rel_path}")
         else:
-            console.print(f"\n[dim]Run 'tree {output}' to see the full structure.[/dim]")
+            console.print(f"\n[dim]Run 'tree {output}' to see full structure.[/dim]")
         
     except TemplateError as e:
         print_error(f"Invalid template: {e}")
