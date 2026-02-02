@@ -1,4 +1,4 @@
-"""Utility helpers for Project Pilot."""
+"""Utility helpers for Python Project (pypo)."""
 
 from rich.console import Console
 from rich.table import Table

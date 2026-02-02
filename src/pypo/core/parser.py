@@ -1,4 +1,6 @@
-"""YAML template parsing for Project Pilot."""
+"""YAML template parsing for Python Project (pypo)."""
+
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Optional

@@ -2,8 +2,8 @@
 
 import click
 
-from pp.core.storage import storage
-from pp.utils.helpers import print_success, print_error, print_info
+from pypo.core.storage import storage
+from pypo.utils.helpers import print_success, print_error, print_info
 
 
 @click.command("duplicate")
@@ -22,14 +22,14 @@ def duplicate(source_name: str, new_name: str, force: bool):
     
     Examples:
     
-        pp duplicate my-web-project my-web-project-v2
+        pypo duplicate my-web-project my-web-project-v2
         
-        pp duplicate react-app react-app-typescript --force
+        pypo duplicate react-app react-app-typescript --force
     """
     # Check if source template exists
     if not storage.template_exists(source_name):
         print_error(f"Source template '{source_name}' not found.")
-        print_info("Run 'pp list' to see available templates.")
+        print_info("Run 'pypo list' to see available templates.")
         raise SystemExit(1)
     
     # Check if destination already exists

@@ -1,11 +1,11 @@
-"""Tests for Project Pilot CLI commands."""
+"""Tests for Python Project (pypo) CLI commands."""
 
 import pytest
 from pathlib import Path
 from click.testing import CliRunner
 
-from pp.cli import main
-from pp.core.storage import Storage
+from pypo.cli import main
+from pypo.core.storage import Storage
 
 
 @pytest.fixture
@@ -17,7 +17,7 @@ def runner():
 @pytest.fixture
 def temp_storage(tmp_path):
     """Create a temporary storage for testing."""
-    return Storage(base_dir=tmp_path / ".pp")
+    return Storage(base_dir=tmp_path / ".pypo")
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ class TestParser:
     
     def test_parse_valid_template(self, sample_template):
         """Test parsing a valid template."""
-        from pp.core.parser import parse_template
+        from pypo.core.parser import parse_template
         
         template = parse_template(sample_template)
         assert template["name"] == "test-project"
@@ -77,14 +77,14 @@ class TestParser:
     
     def test_parse_invalid_yaml(self):
         """Test parsing invalid YAML."""
-        from pp.core.parser import parse_template, TemplateError
+        from pypo.core.parser import parse_template, TemplateError
         
         with pytest.raises(TemplateError):
             parse_template("invalid: yaml: content: [")
     
     def test_validate_missing_required_fields(self):
         """Test validation with missing fields."""
-        from pp.core.parser import TemplateParser
+        from pypo.core.parser import TemplateParser
         
         errors = TemplateParser.validate({})
         assert len(errors) >= 2
@@ -149,7 +149,7 @@ class TestGenerator:
     
     def test_generate_simple_structure(self, tmp_path):
         """Test generating a simple structure."""
-        from pp.core.generator import generate_project
+        from pypo.core.generator import generate_project
         
         template = {
             "name": "test",
@@ -168,7 +168,7 @@ class TestGenerator:
     
     def test_generate_nested_structure(self, tmp_path):
         """Test generating nested directories."""
-        from pp.core.generator import generate_project
+        from pypo.core.generator import generate_project
         
         template = {
             "name": "test",

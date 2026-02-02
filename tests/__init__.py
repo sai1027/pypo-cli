@@ -1,1 +1,1 @@
-"""Tests package for Project Pilot."""
+"""Tests package for Python Project (pypo)."""

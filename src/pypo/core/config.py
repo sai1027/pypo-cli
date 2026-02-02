@@ -1,4 +1,4 @@
-"""Configuration management for Project Pilot."""
+"""Configuration management for Python Project (pypo)."""
 
 import os
 from pathlib import Path
@@ -15,7 +15,7 @@ class Config:
     }
     
     # Environment variable prefix
-    ENV_PREFIX = "PP_"
+    ENV_PREFIX = "PYPO_"
     
     def __init__(self, storage=None):
         """
@@ -31,7 +31,7 @@ class Config:
     def storage(self):
         """Lazy load storage to avoid circular imports."""
         if self._storage is None:
-            from pp.core.storage import storage as default_storage
+            from pypo.core.storage import storage as default_storage
             self._storage = default_storage
         return self._storage
     

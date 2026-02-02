@@ -2,8 +2,8 @@
 
 import click
 
-from pp.core.storage import storage
-from pp.utils.helpers import print_success, print_error, print_info, confirm_action
+from pypo.core.storage import storage
+from pypo.utils.helpers import print_success, print_error, print_info, confirm_action
 
 
 @click.command("delete")
@@ -22,22 +22,22 @@ def delete(name: str, force: bool, archived: bool):
     """
     Delete a template permanently.
     
-    This action cannot be undone. Consider using 'pp archive' instead.
+    This action cannot be undone. Consider using 'pypo archive' instead.
     
     Examples:
     
-        pp delete my-old-project
+        pypo delete my-old-project
         
-        pp delete old-template --force
+        pypo delete old-template --force
         
-        pp delete archived-project --archived
+        pypo delete archived-project --archived
     """
     location = "archive" if archived else "templates"
     
     # Check if template exists
     if not storage.template_exists(name, archived=archived):
         print_error(f"Template '{name}' not found in {location}.")
-        print_info("Run 'pp list' to see available templates.")
+        print_info("Run 'pypo list' to see available templates.")
         raise SystemExit(1)
     
     # Confirm deletion

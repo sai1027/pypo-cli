@@ -1,4 +1,4 @@
-"""Storage management for Project Pilot templates."""
+"""Storage management for Python Project (pypo) templates."""
 
 from pathlib import Path
 import json
@@ -14,9 +14,9 @@ class Storage:
         Initialize storage with optional custom base directory.
         
         Args:
-            base_dir: Custom base directory. Defaults to ~/.pp/
+            base_dir: Custom base directory. Defaults to ~/.pypo/
         """
-        self.base_dir = base_dir or Path.home() / ".pp"
+        self.base_dir = base_dir or Path.home() / ".pypo"
         self.templates_dir = self.base_dir / "templates"
         self.archive_dir = self.base_dir / "archive"
         self.config_file = self.base_dir / "config.json"

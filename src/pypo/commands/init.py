@@ -3,10 +3,10 @@
 import click
 from pathlib import Path
 
-from pp.core.storage import storage
-from pp.core.parser import parse_template, TemplateError
-from pp.core.generator import generate_project, GeneratorError
-from pp.utils.helpers import print_success, print_error, print_info, console
+from pypo.core.storage import storage
+from pypo.core.parser import parse_template, TemplateError
+from pypo.core.generator import generate_project, GeneratorError
+from pypo.utils.helpers import print_success, print_error, print_info, console
 
 
 @click.command("init")
@@ -30,16 +30,16 @@ def init(name: str, output: Path, force: bool):
     
     Examples:
     
-        pp init my-web-project
+        pypo init my-web-project
         
-        pp init react-app --output ./new-project
+        pypo init react-app --output ./new-project
         
-        pp init node-api -o ~/projects/my-api --force
+        pypo init node-api -o ~/projects/my-api --force
     """
     # Check if template exists
     if not storage.template_exists(name):
         print_error(f"Template '{name}' not found.")
-        print_info("Run 'pp list' to see available templates.")
+        print_info("Run 'pypo list' to see available templates.")
         raise SystemExit(1)
     
     # Resolve output path

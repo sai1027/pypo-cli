@@ -1,27 +1,27 @@
-"""Main CLI entry point for Project Pilot."""
+"""Main CLI entry point for Python Project (pypo)."""
 
 import click
 
-from pp import __version__
-from pp.commands import archive, create, delete, duplicate, edit, export, init, list_cmd, source
+from pypo import __version__
+from pypo.commands import archive, create, delete, duplicate, edit, export, init, list_cmd, source
 
 
 @click.group()
-@click.version_option(version=__version__, prog_name="Project Pilot")
+@click.version_option(version=__version__, prog_name="Python Project (pypo)")
 def main():
     """
-    Project Pilot (pp) - Scaffold projects from YAML templates.
+    Python Project (pypo) - Scaffold projects from YAML templates.
     
     Create reusable project templates and initialize new projects
     with a single command.
     
     Examples:
     
-        pp create my-template --path ./template.yaml
+        pypo create my-template --path ./template.yaml
         
-        pp init my-template --output ./new-project
+        pypo init my-template --output ./new-project
         
-        pp list
+        pypo list
     """
     pass
 

@@ -1,4 +1,6 @@
-"""Project structure generator for Project Pilot."""
+"""Project structure generator for Python Project (pypo)."""
+
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Any

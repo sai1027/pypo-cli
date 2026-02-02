@@ -2,8 +2,8 @@
 
 import click
 
-from pp.core.storage import storage
-from pp.utils.helpers import print_success, print_error, print_info
+from pypo.core.storage import storage
+from pypo.utils.helpers import print_success, print_error, print_info
 
 
 @click.command("archive")
@@ -17,19 +17,19 @@ def archive(name: str, restore: bool):
     """
     Archive or restore a template.
     
-    Archived templates are hidden from 'pp list' but can be restored later.
+    Archived templates are hidden from 'pypo list' but can be restored later.
     
     Examples:
     
-        pp archive old-project
+        pypo archive old-project
         
-        pp archive my-template --restore
+        pypo archive my-template --restore
     """
     if restore:
         # Restore from archive
         if not storage.template_exists(name, archived=True):
             print_error(f"Template '{name}' not found in archive.")
-            print_info("Run 'pp list --archived' to see archived templates.")
+            print_info("Run 'pypo list --archived' to see archived templates.")
             raise SystemExit(1)
         
         # Check if active template with same name exists
@@ -51,19 +51,19 @@ def archive(name: str, restore: bool):
         # Archive the template
         if not storage.template_exists(name, archived=False):
             print_error(f"Template '{name}' not found.")
-            print_info("Run 'pp list' to see available templates.")
+            print_info("Run 'pypo list' to see available templates.")
             raise SystemExit(1)
         
         # Check if archived template with same name exists
         if storage.template_exists(name, archived=True):
             print_error(f"An archived template named '{name}' already exists.")
-            print_info("Delete the archived version first with: pp delete {name} --archived")
+            print_info("Delete the archived version first with: pypo delete {name} --archived")
             raise SystemExit(1)
         
         try:
             if storage.archive_template(name):
                 print_success(f"Template '{name}' archived successfully!")
-                print_info("Restore with: pp archive {name} --restore")
+                print_info("Restore with: pypo archive {name} --restore")
             else:
                 print_error("Failed to archive template.")
                 raise SystemExit(1)

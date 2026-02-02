@@ -1,14 +1,16 @@
 """Edit command - Modify a template in default editor."""
 
+from __future__ import annotations
+
 import click
 import subprocess
 import os
 from pathlib import Path
 
-from pp.core.storage import storage
-from pp.core.config import config
-from pp.core.parser import parse_template, TemplateError
-from pp.utils.helpers import print_success, print_error, print_info, print_warning
+from pypo.core.storage import storage
+from pypo.core.config import config
+from pypo.core.parser import parse_template, TemplateError
+from pypo.utils.helpers import print_success, print_error, print_info, print_warning
 
 
 @click.command("edit")
@@ -26,16 +28,16 @@ def edit(name: str, editor: str | None):
     
     Examples:
     
-        pp edit my-web-project
+        pypo edit my-web-project
         
-        pp edit react-app --editor code
+        pypo edit react-app --editor code
         
-        pp edit node-api -e vim
+        pypo edit node-api -e vim
     """
     # Check if template exists
     if not storage.template_exists(name):
         print_error(f"Template '{name}' not found.")
-        print_info("Run 'pp list' to see available templates.")
+        print_info("Run 'pypo list' to see available templates.")
         raise SystemExit(1)
     
     # Get template path
@@ -78,7 +80,7 @@ def edit(name: str, editor: str | None):
         
     except FileNotFoundError:
         print_error(f"Editor '{editor}' not found.")
-        print_info("Set a different editor with: pp config set editor <editor>")
+        print_info("Set a different editor with: pypo config set editor <editor>")
         raise SystemExit(1)
     except Exception as e:
         print_error(f"Failed to edit template: {e}")

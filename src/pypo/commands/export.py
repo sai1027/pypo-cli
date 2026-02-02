@@ -3,8 +3,8 @@
 import click
 from pathlib import Path
 
-from pp.core.storage import storage
-from pp.utils.helpers import print_success, print_error, print_info
+from pypo.core.storage import storage
+from pypo.utils.helpers import print_success, print_error, print_info
 
 
 @click.command("export")
@@ -28,14 +28,14 @@ def export(name: str, output: Path, force: bool):
     
     Examples:
     
-        pp export my-web-project --output ./template.yaml
+        pypo export my-web-project --output ./template.yaml
         
-        pp export react-app -o ~/backups/react.yaml --force
+        pypo export react-app -o ~/backups/react.yaml --force
     """
     # Check if template exists
     if not storage.template_exists(name):
         print_error(f"Template '{name}' not found.")
-        print_info("Run 'pp list' to see available templates.")
+        print_info("Run 'pypo list' to see available templates.")
         raise SystemExit(1)
     
     # Resolve output path

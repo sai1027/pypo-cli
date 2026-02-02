@@ -3,9 +3,9 @@
 import click
 from pathlib import Path
 
-from pp.core.storage import storage
-from pp.core.parser import parse_template, TemplateError
-from pp.utils.helpers import print_success, print_error, print_info
+from pypo.core.storage import storage
+from pypo.core.parser import parse_template, TemplateError
+from pypo.utils.helpers import print_success, print_error, print_info
 
 
 @click.command("create")
@@ -29,9 +29,9 @@ def create(name: str, path: Path, force: bool):
     
     Examples:
     
-        pp create my-web-project --path ./template.yaml
+        pypo create my-web-project --path ./template.yaml
         
-        pp create react-app -p ~/templates/react.yaml --force
+        pypo create react-app -p ~/templates/react.yaml --force
     """
     # Check if template already exists
     if storage.template_exists(name) and not force:

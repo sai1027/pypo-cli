@@ -1,4 +1,4 @@
-# Project Pilot (`pp`)
+# Python Project (`pypo`)
 
 A powerful CLI tool for scaffolding projects from YAML templates.
 
@@ -6,11 +6,11 @@ A powerful CLI tool for scaffolding projects from YAML templates.
 
 ```bash
 # Install from PyPI (when published)
-pip install project-pilot
+pip install pypo
 
 # Install from source (development)
 git clone <repo-url>
-cd project-pilot
+cd pypo
 pip install -e ".[dev]"
 ```
 
@@ -56,28 +56,28 @@ structure:
 ### 2. Save the Template
 
 ```bash
-pp create web-project --path ./my-web-project.yaml
+pypo create web-project --path ./my-web-project.yaml
 ```
 
 ### 3. Initialize a New Project
 
 ```bash
-pp init web-project --output ./my-new-site
+pypo init web-project --output ./my-new-site
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `pp create <name> --path <yaml>` | Import a YAML template |
-| `pp init <name> [--output <dir>]` | Scaffold a project |
-| `pp list [--archived]` | List all templates |
-| `pp source <name>` | Display template YAML |
-| `pp edit <name>` | Open template in editor |
-| `pp export <name> --output <path>` | Export template to file |
-| `pp duplicate <name> <new_name>` | Clone a template |
-| `pp delete <name>` | Remove a template |
-| `pp archive <name>` | Archive a template |
+| `pypo create <name> --path <yaml>` | Import a YAML template |
+| `pypo init <name> [--output <dir>]` | Scaffold a project |
+| `pypo list [--archived]` | List all templates |
+| `pypo source <name>` | Display template YAML |
+| `pypo edit <name>` | Open template in editor |
+| `pypo export <name> --output <path>` | Export template to file |
+| `pypo duplicate <name> <new_name>` | Clone a template |
+| `pypo delete <name>` | Remove a template |
+| `pypo archive <name>` | Archive a template |
 
 ## Template YAML Format
 
@@ -97,12 +97,12 @@ structure:                       # Required: list of files/directories
 
 ## Configuration
 
-Templates are stored in `~/.pp/templates/`
+Templates are stored in `~/.pypo/templates/`
 
 ### Storage Structure
 
 ```
-~/.pp/
+~/.pypo/
 ├── config.json       # Global settings
 ├── templates/        # Active templates
 │   ├── template1.yaml
@@ -116,7 +116,7 @@ Templates are stored in `~/.pp/templates/`
 ```bash
 # Clone and install
 git clone <repo-url>
-cd project-pilot
+cd pypo
 pip install -e ".[dev]"
 
 # Run tests

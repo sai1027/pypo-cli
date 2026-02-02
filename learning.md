@@ -42,12 +42,12 @@ my-project/
 ### The `__init__.py` File
 
 ```python
-# src/pp/__init__.py
+# src/pypo/__init__.py
 __version__ = "0.1.0"
 ```
 
 - Makes a directory a Python package
-- Can export public API: `from pp import create_project`
+- Can export public API: `from pypo import create_project`
 - Defines `__version__` for package versioning
 
 ---
@@ -90,7 +90,7 @@ dev = [
 ]
 
 [project.scripts]
-pp = "pp.cli:main"  # This creates the 'pp' command!
+pypo = "pypo.cli:main"  # This creates the 'pypo' command!
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -134,7 +134,7 @@ def hello(name, count):
 # Command group (subcommands)
 @click.group()
 def cli():
-    """Project Pilot - Scaffold projects from templates."""
+    """Python Project (pypo) - Scaffold projects from templates."""
     pass
 
 @cli.command()
@@ -189,7 +189,7 @@ home = Path.home()
 
 # Common patterns for CLI tools:
 # 1. Hidden folder in home
-config_dir = Path.home() / ".pp"
+config_dir = Path.home() / ".pypo"
 
 # 2. Using platformdirs (recommended for production)
 from platformdirs import user_data_dir, user_config_dir
@@ -200,11 +200,11 @@ config_dir = Path(user_config_dir("project-pilot", "YourName"))
 
 ### Platform-Specific Locations
 
-| Platform | `~/.pp/` resolves to |
+| Platform | `~/.pypo/` resolves to |
 |----------|----------------------|
-| Windows | `C:\Users\<user>\.pp\` |
-| macOS | `/Users/<user>/.pp/` |
-| Linux | `/home/<user>/.pp/` |
+| Windows | `C:\Users\<user>\.pypo\` |
+| macOS | `/Users/<user>/.pypo/` |
+| Linux | `/home/<user>/.pypo/` |
 
 ### Using `platformdirs` (Production-Ready)
 
@@ -226,7 +226,7 @@ config_dir = user_config_dir("project-pilot")
 ### Recommended Storage Structure
 
 ```
-~/.pp/
+~/.pypo/
 ├── config.json           # Global settings
 ├── templates/            # Saved YAML templates
 │   ├── web-project.yaml
@@ -239,13 +239,13 @@ config_dir = user_config_dir("project-pilot")
 ### Implementation Example
 
 ```python
-# src/pp/core/storage.py
+# src/pypo/core/storage.py
 from pathlib import Path
 import json
 
 class Storage:
     def __init__(self):
-        self.base_dir = Path.home() / ".pp"
+        self.base_dir = Path.home() / ".pypo"
         self.templates_dir = self.base_dir / "templates"
         self.archive_dir = self.base_dir / "archive"
         self.config_file = self.base_dir / "config.json"
@@ -288,7 +288,7 @@ class Storage:
 Stored in user's home directory. Applies everywhere.
 
 ```python
-# ~/.pp/config.json
+# ~/.pypo/config.json
 {
     "default_output_dir": "~/Projects",
     "editor": "code",
@@ -301,7 +301,7 @@ Stored in user's home directory. Applies everywhere.
 Stored in the current project directory.
 
 ```python
-# ./pp.local.json (in project root)
+# ./pypo.local.json (in project root)
 {
     "template_name": "my-web-project",
     "created_at": "2025-01-15"
@@ -317,7 +317,7 @@ def find_local_config():
     """Walk up directories to find local config."""
     current = Path.cwd()
     while current != current.parent:
-        local_config = current / "pp.local.json"
+        local_config = current / "pypo.local.json"
         if local_config.exists():
             return local_config
         current = current.parent
@@ -345,10 +345,10 @@ import os
 
 def get_storage_dir():
     """Get storage directory with env override."""
-    env_dir = os.environ.get("PP_STORAGE_DIR")
+    env_dir = os.environ.get("PYPO_STORAGE_DIR")
     if env_dir:
         return Path(env_dir)
-    return Path.home() / ".pp"
+    return Path.home() / ".pypo"
 ```
 
 ---
@@ -489,30 +489,30 @@ def generate_structure(structure: list, base_path: Path):
 
 ## 8. Entry Points & Console Scripts
 
-### How `pp` Becomes a Command
+### How `pypo` Becomes a Command
 
 When you define this in `pyproject.toml`:
 
 ```toml
 [project.scripts]
-pp = "pp.cli:main"
+pypo = "pypo.cli:main"
 ```
 
 It means:
-1. Create an executable called `pp`
-2. When run, import `pp.cli` module
+1. Create an executable called `pypo`
+2. When run, import `pypo.cli` module
 3. Call the `main()` function
 
 ### The CLI Entry Point
 
 ```python
-# src/pp/cli.py
+# src/pypo/cli.py
 import click
 
 @click.group()
 @click.version_option()
 def main():
-    """Project Pilot - Create projects from templates."""
+    """Python Project (pypo) - Create projects from templates."""
     pass
 
 @main.command()
@@ -521,7 +521,7 @@ def list():
     click.echo("Templates...")
 
 # Register other commands
-from pp.commands import create, init, source
+from pypo.commands import create, init, source
 main.add_command(create.create)
 main.add_command(init.init)
 main.add_command(source.source)
@@ -533,10 +533,10 @@ main.add_command(source.source)
 # Install in development mode
 pip install -e .
 
-# Now 'pp' is available globally!
-pp --help
-pp list
-pp create my-template --path ./template.yaml
+# Now 'pypo' is available globally!
+pypo --help
+pypo list
+pypo create my-template --path ./template.yaml
 ```
 
 ---
@@ -668,8 +668,8 @@ pip install -e ".[dev]"
 # Make changes to code...
 
 # Test your command
-pp list
-pp create test --path ./template.yaml
+pypo list
+pypo create test --path ./template.yaml
 
 # Run tests
 pytest
@@ -684,7 +684,7 @@ ruff check src/ --fix
 ```python
 # tests/test_cli.py
 from click.testing import CliRunner
-from pp.cli import main
+from pypo.cli import main
 
 def test_list_command():
     runner = CliRunner()
@@ -732,7 +732,7 @@ python -m twine upload dist/*
 | CLI group | `@click.group()` |
 | CLI argument | `@click.argument('name')` |
 | CLI option | `@click.option('--flag', '-f')` |
-| Entry point | `pp = "pp.cli:main"` in pyproject.toml |
+| Entry point | `pypo = "pypo.cli:main"` in pyproject.toml |
 | Dev install | `pip install -e .` |
 
 ---

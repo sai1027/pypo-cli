@@ -3,13 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "project-pilot"
+name = "pypo"
 version = "0.1.0"
-description = "CLI tool for scaffolding projects from YAML templates"
+description = "Python Project (pypo) - CLI tool for scaffolding projects from YAML templates"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
-keywords = ["cli", "scaffolding", "project", "template", "generator"]
+keywords = ["cli", "scaffolding", "project", "template", "generator", "python-project"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
@@ -38,7 +38,7 @@ dev = [
 ]
 
 [project.scripts]
-pp = "pp.cli:main"
+pypo = "pypo.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
