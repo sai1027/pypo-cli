@@ -1,6 +1,6 @@
 # Python Project (`pypo`)
 
-A powerful CLI tool for scaffolding projects from YAML templates.
+A simple CLI tool to create project structures from YAML templates.
 
 ## Installation
 

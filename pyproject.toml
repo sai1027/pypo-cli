@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pypo-cli"
-version = "0.1.1"
-description = "Python Project (pypo) - CLI tool for scaffolding projects from YAML templates"
+version = "0.1.2"
+description = "A simple CLI tool to create project structures from YAML templates"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
